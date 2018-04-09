@@ -1,0 +1,56 @@
+﻿@model ShoppingCart.ViewModels.ProductsViewModel
+@using ShoppingCart.Shared
+
+<br/>
+@if (Model.PagedProductList.Count() > 0)
+{
+    <div class="container">
+        <div class="jumbotron">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ImageUrl)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.PagedProductList)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Category.CategoryName, "CategoryProductList", "Product", new { categoryID = item.Category.CategoryID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImageUrl)" height="40" width="40" />
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID })
+                </td>
+            </tr>
+        }
+
+    </table>
+            </div>
+        </div>
+    <br />
+    <p>Page @(Model.PageNumber < Model.PageNumber ? 0 : Model.PageNumber) of @Model.TotalPages</p>
+    @Html.CustomPaging(Model.PageNumber, Model.TotalPages)
+}
+else
+{
+    <h2>No Product Found!</h2>
+}

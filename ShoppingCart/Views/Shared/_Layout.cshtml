@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title E-Shopping</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["Customer"] != null)
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Authentication", new { session = Session["Customer"] }, null)</li>
+                        <li>@Html.ActionLink("My Cart", "GetCartEntries", "CartProduct", new { id = Session["Customer"] }, null)</li>
+                        <li>@Html.ActionLink("My Orders", "GetPreviousOrders", "Order", new { id = Session["Customer"] }, null)</li>
+                        <li>@Html.ActionLink("Proceed To Checkout", "Index", "Checkout")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Index", "Authentication")</li>
+                    }
+
+                    @if (Session["Customer"] == null)
+                    {
+                        <li>@Html.ActionLink("Sign Up", "Create", "Customer")</li>
+                    }
+                    <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                    
+                </ul>
+                <br />
+                <div align="right">
+                    @using (Html.BeginForm("SearchProduct", "Product"))
+                    {
+                        <input type="text" name="SearchBox" id="SearchBox" placeholder="Search"/>
+                        <input class="btn btn-default" type="submit" value="Search">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Thanks for visiting E-Shopping</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

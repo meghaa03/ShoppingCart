@@ -1,0 +1,117 @@
+﻿@model ShoppingCart.ViewModels.TopCategoriesProductsViewModel
+
+<br/>
+@{int categoryNo = 0; }
+@foreach (var productList in Model.TopProductsForCategories)
+{
+    <div class="container col-md-6">
+    @foreach (var product in productList)
+    {
+        <div class="jumbotron" >
+                @Html.DisplayName(Model.TopCategories[categoryNo].CategoryName)
+                <a href='@Url.Action("Details", "Product", new { id = product.ProductID })'>
+                    <img src="@Url.Content(product.ImageUrl)" class="img-thumbnail" style="width:100%" />
+                </a>
+                <div class="productTitle">
+                    <p>@Html.ActionLink(@product.ProductName, "Details", "Product", new { id = product.ProductID }, null)</p>
+                    <p>@product.Description</p>
+                </div>
+        </div>
+        
+    }
+    </div>
+    categoryNo = categoryNo + 1;
+    
+}
+
+
+<hr />
+@*Displaying products from other categories*@
+
+@{int categoryNumber = 0; }
+@foreach (var productList in Model.ProductsForOtherCategories)
+{
+    <div class="container col-md-6">
+    @foreach (var product in productList)
+    {
+        <div class="jumbotron">
+            @Html.DisplayName(Model.OtherCategories[categoryNumber].CategoryName)
+            <a href='@Url.Action("Details", "Product", new { id = product.ProductID })'>
+                <img src="@Url.Content(product.ImageUrl)" style="width:100%" />
+            </a>
+            <div class="productTitle">
+                <p>@Html.ActionLink(@product.ProductName, "Details", "Product", new { id = product.ProductID }, null)</p>
+                <p>@product.Description</p>
+            </div>
+        </div>
+    }
+    </div>
+    categoryNumber = categoryNumber + 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("ProductName")
+            </th>
+            <th>
+                @Html.DisplayName("Price")
+            </th>
+            <th>
+                @Html.DisplayName("VariantID")
+            </th>
+            <th>
+                @Html.DisplayName("VariantValue")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var product in productList)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => product.VariantID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => product.VariantValue)
+            </td>
+        </tr>
+        }
+    </table>*@

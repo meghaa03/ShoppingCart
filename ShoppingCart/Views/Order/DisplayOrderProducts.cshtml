@@ -1,0 +1,31 @@
+﻿@model IList<ShoppingCart.Models.OrderProduct>
+
+<br/>
+@if (Model.Count() > 0)
+{
+    <div class="container">
+        <div class="jumbotron">
+    <table class="table table-hover">
+        <tr>
+            <td>@Html.Label("Name")</td>
+            <td>@Html.Label("Color")</td>
+            <td>@Html.Label("Size")</td>
+            <td>@Html.Label("Price")</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.Product.ProductName)</td>
+                <td>@Html.DisplayFor(model => item.Product.Variant.Color)</td>
+                <td>@Html.DisplayFor(model => item.Product.Variant.Size)</td>
+                <td>@Html.DisplayFor(model => item.Product.Price)</td>
+            </tr>
+        }
+    </table>
+            </div>
+        </div>
+}
+else
+{
+    <h2>No Product Found!</h2>
+}

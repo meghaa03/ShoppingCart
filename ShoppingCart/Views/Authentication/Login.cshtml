@@ -1,0 +1,11 @@
+﻿<h2>Login!</h2>
+
+@using (Html.BeginForm("AuthenticateUser", "Authentication"))
+{
+    <br />
+    <input type="text" class="form-control" placeholder="Username" name="username" id="username" />
+    <br />
+    <input type="password" class="form-control" placeholder="Password" name="password" id="password" />
+    <br />
+    <input type="submit" class="btn btn-primary" value="Login" />
+}

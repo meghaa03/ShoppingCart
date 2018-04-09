@@ -1,0 +1,12 @@
+﻿@using (Html.BeginForm("OrderPlacement", "Checkout", FormMethod.Post))
+{
+    <br/>
+    <input type="text" class="form-control" placeholder="House Street Block" name="houseStreetBlock" id="houseStreetBlock" />
+    <br />
+    <input type="text" class="form-control" placeholder="State" name="state" id="state" />
+    <br />
+    <input type="text" class="form-control" placeholder="Pincode" name="pincode" id="pincode" />
+    <br />
+    <button class="btn btn-success" type="submit">Place Order</button>
+}
+

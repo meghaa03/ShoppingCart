@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ShoppingCart.Models.Order>
+
+<br/>
+@if (Model.Count() > 0)
+{
+    <div class="container">
+        <div class="jumbotron">
+    <table class="table table-hover">
+        <tr>
+            <th class="col-md-6">
+                @Html.DisplayNameFor(model => model.OrderID)
+            </th>
+            <th class="col-md-6">
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.OrderID.ToString(), "DisplayOrderProducts", "Order", new { orderID = item.OrderID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+            </tr>
+        }
+    </table>
+            </div>
+        </div>
+}
+else
+{
+    <h2>No Orders Found!</h2>
+}
